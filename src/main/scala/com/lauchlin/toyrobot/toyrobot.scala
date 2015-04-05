@@ -14,7 +14,7 @@ object ToyRobot extends App {
       case _ => ()
     }
 
-    var robot=new Robot(new Table(new Point(0,0), new Point(4,4)))
+    var robot=new Robot(Table(Point(0,0), Point(4,4)))
     
     if ( args.length == 1 ) {
       Source.fromFile(args(0)).getLines.foreach(execute)

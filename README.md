@@ -1,18 +1,20 @@
 Toy Robot
 =========
 
-Toy Robot is a minimalistic toy robot ruby implementation conforming to the specifications from the [problem description](PROBLEM.md).
+Toy Robot is a minimalistic toy robot scala implementation conforming to the specifications from the [problem description](PROBLEM.md).
 
 Testing
 -------
 
-Tests are supplied as rspec tests and a set of example input files.
+No tests as of yet.
 
-To run rspec tests:
+Building
+--------
+
+The easiest way is to use sbt. This produces a fat jar with scala dependencies all wrapped up inside.
 
 ```
-bundle
-bundle exec rspec -f d
+sbt assembly
 ```
 
 Running
@@ -21,5 +23,5 @@ Running
 To run the toy robot against an input file:
 
 ```
-ruby toyrobot.rb examples/example1.txt
+./run.sh examples/example1.txt
 ```

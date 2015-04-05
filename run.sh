@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-java -jar toyrobot.jar
+java -jar toyrobot.jar $@

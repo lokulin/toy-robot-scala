@@ -13,15 +13,13 @@ class Robot(var table: Table) {
       facing = Directions.indexOf(nDirection)
     }
 
-  def move() = if ( facing != -1 && table.contains(lookingAt) )
-    loc = lookingAt
+  def move() = if (facing != -1 && table.contains(lookingAt)) loc = lookingAt
 
   def left() = facing = (facing+1) % Directions.length 
 
   def right() = facing = floorMod(facing-1, Directions.length)
 
-  def report = if ( facing != -1 )
-    println(loc.x + "," + loc.y + "," + Directions(facing))
+  def report = if (facing != -1) println(loc.x+","+loc.y+","+Directions(facing))
 
-  private def lookingAt = loc+Point(round(cos(facing)),round(sin(facing)))
+  private def lookingAt = loc+Point(round(cos(PI*facing/2.0)),round(sin(PI*facing/2.0)))
 }

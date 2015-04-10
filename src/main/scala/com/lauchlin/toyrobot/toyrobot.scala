@@ -1,6 +1,7 @@
 package com.lauchlin.toyrobot
 
 import scala.io._
+import Math.round
 
 object ToyRobot extends App {
     val Place="""^PLACE (\d),(\d),([A-Z]+)$""".r
@@ -12,9 +13,11 @@ object ToyRobot extends App {
       case "MOVE"   =>  robot = robot.move
       case "LEFT"   =>  robot = robot.left
       case "RIGHT"  =>  robot = robot.right
-      case "REPORT" =>  robot.report(Directions)
-      case Place(x, y, direction) => if (Directions.contains(direction)) 
-            robot = robot.place(x.toDouble, y.toDouble, Directions.indexOf(direction)/2.0, table)
+      case "REPORT" =>  robot.report((x: Double, y: Double, facing: Double) => 
+          println(round(x)+","+round(y)+","+Directions(round(facing.toFloat*2))))
+      case Place(x, y, direction) => 
+        if (Directions.contains(direction)) 
+          robot = robot.place(x.toDouble, y.toDouble, Directions.indexOf(direction)/2.0, table)
       case _ => ()
     }
 

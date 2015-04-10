@@ -1,6 +1,10 @@
 package com.lauchlin.toyrobot
 
-case class Table(var lowerLeftCorner: Point, var upperRightCorner: Point) {
-  def contains(p: Point) = p >= lowerLeftCorner && p <= upperRightCorner
+sealed trait Container { def contains(p: Point) = false }
+
+case object Stasis extends Container
+
+case class Table(val lowerLeftCorner: Point, val upperRightCorner: Point) extends Container {
+  override def contains(p: Point) = p >= lowerLeftCorner && p <= upperRightCorner
 }
 

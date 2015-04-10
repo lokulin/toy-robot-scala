@@ -2,22 +2,17 @@ package com.lauchlin.toyrobot
 
 import Math._
 
-class Robot(var table: Table) {
-  var loc = Point(0,0)
-  var facing = -1
-  val Directions=Array("EAST","NORTH","WEST","SOUTH")
+case class Robot(loc: Point, facing: Double, table: Container) {
 
-  def place(nx: Long, ny: Long, nDirection: String) =
-    if (Directions.contains(nDirection) && table.contains(Point(nx,ny))) {
-      loc = Point(nx, ny)
-      facing = Directions.indexOf(nDirection)
-    }
+  def place(x: Double, y: Double, facing: Double, table: Table) = newRobot(Point(x, y), facing, table)
+  def move  = newRobot(loc + Point(cos(PI*facing),sin(PI*facing)), facing, table) 
+  def left  = newRobot(loc, (facing+0.5) % 2, table)
+  def right = newRobot(loc, (((facing-0.5) % 2) + 2) % 2, table)
+  def report(directions: Array[String]) = 
+        if(table.isInstanceOf[Table]) println(round(loc.x)+","+round(loc.y)+","+directions(round(facing.toFloat*2)))
 
-  def move()  = if (placed && table.contains(lookingAt)) loc = lookingAt
-  def left()  = if (placed) facing = (facing+1) % Directions.length
-  def right() = if (placed) facing = floorMod(facing-1, Directions.length)
-  def report  = if (placed) println(loc.x+","+loc.y+","+Directions(facing))
+  private def newRobot(loc: Point, facing: Double, table: Container) = 
+    if (table.isInstanceOf[Table] && table.contains(loc)) Robot(loc, facing, table)
+    else this
 
-  private def lookingAt = loc+Point(round(cos(PI*facing/2.0)),round(sin(PI*facing/2.0)))
-  private def placed = facing != -1
 }

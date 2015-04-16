@@ -17,14 +17,14 @@ object ToyRobot extends App {
         robot
     case Place(x, y, direction) => 
       if (Directions.contains(direction)) 
-        robot.place(x.toDouble, y.toDouble, Directions.indexOf(direction)/2.0, table)
+        robot.place(Point(x.toDouble, y.toDouble), Directions.indexOf(direction)/2.0, table)
       else
         robot
     case _ => robot
   }
 
   if ( args.length == 1 ) {
-    Source.fromFile(args(0)).getLines.foldLeft(Robot())((robot, command) => execute(robot, command))
+    Source.fromFile(args(0)).getLines.foldLeft(Robot())(execute)
   } else {
     Console.err.println("usage: ./run.sh <input.txt>")
     System.exit(1) 

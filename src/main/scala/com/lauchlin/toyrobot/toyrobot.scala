@@ -7,7 +7,7 @@ object ToyRobot extends App {
   val Place="""^PLACE (\d),(\d),([A-Z]+)$""".r
   val Directions=Array("NORTH", "EAST", "SOUTH","WEST")
   val table = Table(Point(0,0), Point(4,4))
-  
+
   def execute(robot: Robot, command: String) = command match {
     case "MOVE"   =>  robot.move
     case "LEFT"   =>  robot.left
@@ -15,9 +15,9 @@ object ToyRobot extends App {
     case "REPORT" =>  robot.report((x: Double, y: Double, facing: Double) => 
         println(round(x)+","+round(y)+","+Directions(round(facing.toFloat*2))))
         robot
-    case Place(x, y, direction) => 
+    case Place(x, y, direction) =>
       if (Directions.contains(direction)) 
-        robot.place(Point(x.toDouble, y.toDouble), Directions.indexOf(direction)/2.0, table)
+        robot.place(Point(x.toDouble, y.toDouble), Directions.indexOf(direction)/2.0, Some(table))
       else
         robot
     case _ => robot
@@ -27,6 +27,6 @@ object ToyRobot extends App {
     Source.fromFile(args(0)).getLines.foldLeft(Robot())(execute)
   } else {
     Console.err.println("usage: ./run.sh <input.txt>")
-    System.exit(1) 
+    System.exit(1)
   }
 }

@@ -5,7 +5,7 @@ import Math.round
 
 object ToyRobot extends App {
   val Place="""^PLACE (\d),(\d),([A-Z]+)$""".r
-  val Directions=Array("EAST","NORTH","WEST","SOUTH")
+  val Directions=Array("NORTH", "EAST", "SOUTH","WEST")
   val table = Table(Point(0,0), Point(4,4))
   
   def execute(robot: Robot, command: String) = command match {

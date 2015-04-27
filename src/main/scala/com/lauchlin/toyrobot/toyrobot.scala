@@ -17,7 +17,7 @@ object ToyRobot extends App {
         robot
     case Place(x, y, direction) =>
       if (Directions.contains(direction))
-        robot.place(Point(x.toDouble, y.toDouble), Directions.indexOf(direction)/2.0, Some(table))
+        robot.place(loc => Point(x.toDouble, y.toDouble), facing = Directions.indexOf(direction)/2.0, table = Some(table))
       else
         robot
     case _ => robot
